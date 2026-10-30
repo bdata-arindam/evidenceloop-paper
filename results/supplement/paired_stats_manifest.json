@@ -1,0 +1,14 @@
+{
+  "status": "COMPLETED",
+  "seed": 0,
+  "bootstrap_resamples": 10000,
+  "pairing": "every comparison is between two conditions scored on the same held-out claims, so the bootstrap resamples claims and McNemar is computed on the discordant pairs",
+  "inputs": [
+    "predictions.csv.gz",
+    "predictions_oracle.csv.gz",
+    "verification_by_budget.csv",
+    "retrieved_idx.npy",
+    "fever_dev.jsonl"
+  ],
+  "note": "These analyses were added for the ACLing 2026 review. They introduce no new measurement: the accuracies are re-derived from the retained per-claim records and reconciled against the reported table."
+}

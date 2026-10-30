@@ -1,0 +1,10 @@
+{
+  "pages_cited_wanted": 2892,
+  "pages_cited_found": 2892,
+  "distractors": 119599,
+  "pages_total": 122491,
+  "lines_scanned": 5416537,
+  "n_distractors_target": 120000,
+  "seed": 0,
+  "note": "The retrieval pool is every cited page plus a random sample of the rest. A smaller pool makes retrieval easier than the full snapshot, so every cost measured on it is a lower bound."
+}

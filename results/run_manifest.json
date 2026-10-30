@@ -1,0 +1,70 @@
+{
+  "run_id": "20261029T162220Z",
+  "status": "COMPLETED",
+  "data": "FEVER: human-written claims against an encyclopaedia snapshot, labelled SUPPORTS, REFUTES or NOT ENOUGH INFO, with the sentences an annotator used",
+  "provenance": {
+    "claims_file": "fever_dev.jsonl",
+    "claims_sha256": "e89865bfe1b4dd054e03dd57d7241a6fde24862905f31117cf0cd719f7c78df7",
+    "snapshot": "wiki-pages.zip",
+    "retrieval_pool": {
+      "pages_cited_wanted": 2892,
+      "pages_cited_found": 2892,
+      "distractors": 119599,
+      "pages_total": 122491,
+      "lines_scanned": 5416537,
+      "n_distractors_target": 120000,
+      "seed": 0,
+      "note": "The retrieval pool is every cited page plus a random sample of the rest. A smaller pool makes retrieval easier than the full snapshot, so every cost measured on it is a lower bound."
+    }
+  },
+  "llm_arm": {
+    "status": "NOT EXECUTED",
+    "reason": "The project specification asks for an executed language model producing evidence-linked claims with retained prompts and raw outputs. No language model was executed in this study and none of its results depend on one. The claims are the corpus authors' and the verifier is a retrieval and classifier pipeline. Nothing here should be read as a measurement of any language model."
+  },
+  "oracle_retrieval": "For a claim that can be settled, the annotator's own sentences are promoted to the top of the retrieved list. No analyst could do this, so it is an upper bound that separates what better retrieval could buy from what it could not.",
+  "budgets": [
+    1,
+    2,
+    5,
+    10,
+    20,
+    50,
+    100
+  ],
+  "features": [
+    "top_score",
+    "mean_score",
+    "score_gap",
+    "score_decay",
+    "max_cover",
+    "mean_cover",
+    "cover_gap",
+    "n_titles",
+    "claim_tokens",
+    "above_half_cover"
+  ],
+  "split": 0.5,
+  "seed": 0,
+  "n_claims": 19998,
+  "label_counts": {
+    "NOT ENOUGH INFO": 6666,
+    "SUPPORTS": 6666,
+    "REFUTES": 6666
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "sklearn": "1.8.0",
+    "scipy": "1.17.0"
+  },
+  "limitations": [
+    "The retrieval pool is every cited page plus a sampled 120,000 distractors rather than the full 5.4 million page snapshot. A smaller pool makes retrieval easier, so every cost reported here is a lower bound on the cost against the whole snapshot.",
+    "Cost is counted in sentences read. It does not include the cost of producing the retrieval ranking itself, which a real verifier also pays.",
+    "A NOT ENOUGH INFO claim has no gold evidence by construction, so evidence recall is defined only for the claims that can be settled. That is a property of the task rather than a choice made here.",
+    "No language model was executed. The specification asks for one and its absence is recorded rather than worked around; nothing in these results is a measurement of a language model.",
+    "The claims are written by annotators to be checkable against this snapshot. Claims arising in the wild would be messier and the share that cannot be settled would not be one third by construction.",
+    "The verifier reads retrieved sentences through summary features rather than reading them as language. A reader that understood the sentences would do better on every budget, which would raise the curves without changing which label benefits from a larger budget."
+  ]
+}

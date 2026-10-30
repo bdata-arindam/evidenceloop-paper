@@ -1,0 +1,21 @@
+11:27:06  RUN 20261029T162706Z start, model mlx-community/SmolLM3-3B-4bit
+11:27:07  claims 19,998  sentences 572,664  retrieval (19998, 100)
+11:27:07  subsample: 198 claims, SUPPORTS 66, REFUTES 66, NOT ENOUGH INFO 66
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 3266.27it/s]
+11:27:39    budget   1: answered 198/198  accuracy among answered 0.4697  over all 0.4697
+11:28:25    budget   5: answered 198/198  accuracy among answered 0.4697  over all 0.4697
+11:29:56    budget  20: answered 198/198  accuracy among answered 0.3990  over all 0.3990
+11:38:44    budget 100: answered 198/198  accuracy among answered 0.3485  over all 0.3485
+11:38:44  summary:
+ budget  claims  answered  unparsed  accuracy_over_all  accuracy_among_answered  recall_SUPPORTS  predicted_SUPPORTS  recall_REFUTES  predicted_REFUTES  recall_NOT ENOUGH INFO  predicted_NOT ENOUGH INFO
+      1     198       198         0             0.4697                   0.4697           0.8939              0.6869          0.1970             0.0960                  0.3182                     0.2172
+      5     198       198         0             0.4697                   0.4697           0.9697              0.7475          0.1818             0.0909                  0.2576                     0.1616
+     20     198       198         0             0.3990                   0.3990           0.9242              0.8081          0.1515             0.1061                  0.1212                     0.0859
+    100     198       198         0             0.3485                   0.3485           1.0000              0.9596          0.0455             0.0404                  0.0000                     0.0000
+11:38:44  against the feature verifier on the full test half:
+ budget  language_model  feature_verifier  chance
+      1          0.4697            0.4001  0.3333
+      5          0.4697            0.4080  0.3333
+     20          0.3990            0.4229  0.3333
+    100          0.3485            0.4281  0.3333
+11:38:44  llm_arm_manifest.json written; RUN 20261029T162706Z COMPLETED

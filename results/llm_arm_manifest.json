@@ -1,0 +1,118 @@
+{
+  "run_id": "20261007T050153Z",
+  "status": "COMPLETED",
+  "arm": "language model verifier",
+  "model": "mlx-community/SmolLM3-3B-4bit",
+  "runtime": "mlx on the local GPU",
+  "decoding": "greedy",
+  "max_new_tokens": 8,
+  "prompt": "single turn, thinking disabled, one label requested and nothing else",
+  "subsample": {
+    "n_claims": 198,
+    "budgets": [
+      1,
+      5,
+      20,
+      100
+    ],
+    "seed": 0,
+    "drawn_from": "the same held-out half the feature verifier was scored on, stratified by label"
+  },
+  "summary": [
+    {
+      "budget": 1,
+      "claims": 198,
+      "answered": 198,
+      "unparsed": 0,
+      "accuracy_over_all": 0.4696969696969697,
+      "accuracy_among_answered": 0.4696969696969697,
+      "recall_SUPPORTS": 0.8939393939393939,
+      "predicted_SUPPORTS": 0.6919191919191919,
+      "recall_REFUTES": 0.19696969696969696,
+      "predicted_REFUTES": 0.09595959595959595,
+      "recall_NOT ENOUGH INFO": 0.3181818181818182,
+      "predicted_NOT ENOUGH INFO": 0.21212121212121213
+    },
+    {
+      "budget": 5,
+      "claims": 198,
+      "answered": 198,
+      "unparsed": 0,
+      "accuracy_over_all": 0.48484848484848486,
+      "accuracy_among_answered": 0.48484848484848486,
+      "recall_SUPPORTS": 0.9696969696969697,
+      "predicted_SUPPORTS": 0.7424242424242424,
+      "recall_REFUTES": 0.19696969696969696,
+      "predicted_REFUTES": 0.09595959595959595,
+      "recall_NOT ENOUGH INFO": 0.2878787878787879,
+      "predicted_NOT ENOUGH INFO": 0.16161616161616163
+    },
+    {
+      "budget": 20,
+      "claims": 198,
+      "answered": 198,
+      "unparsed": 0,
+      "accuracy_over_all": 0.4090909090909091,
+      "accuracy_among_answered": 0.4090909090909091,
+      "recall_SUPPORTS": 0.9242424242424242,
+      "predicted_SUPPORTS": 0.797979797979798,
+      "recall_REFUTES": 0.18181818181818182,
+      "predicted_REFUTES": 0.11616161616161616,
+      "recall_NOT ENOUGH INFO": 0.12121212121212122,
+      "predicted_NOT ENOUGH INFO": 0.08585858585858586
+    },
+    {
+      "budget": 100,
+      "claims": 198,
+      "answered": 198,
+      "unparsed": 0,
+      "accuracy_over_all": 0.3484848484848485,
+      "accuracy_among_answered": 0.3484848484848485,
+      "recall_SUPPORTS": 0.9848484848484849,
+      "predicted_SUPPORTS": 0.9494949494949495,
+      "recall_REFUTES": 0.06060606060606061,
+      "predicted_REFUTES": 0.050505050505050504,
+      "recall_NOT ENOUGH INFO": 0.0,
+      "predicted_NOT ENOUGH INFO": 0.0
+    }
+  ],
+  "comparison": [
+    {
+      "budget": 1,
+      "language_model": 0.4696969696969697,
+      "feature_verifier": 0.4001400140014001,
+      "chance": 0.3333333333333333
+    },
+    {
+      "budget": 5,
+      "language_model": 0.48484848484848486,
+      "feature_verifier": 0.408040804080408,
+      "chance": 0.3333333333333333
+    },
+    {
+      "budget": 20,
+      "language_model": 0.4090909090909091,
+      "feature_verifier": 0.4229422942294229,
+      "chance": 0.3333333333333333
+    },
+    {
+      "budget": 100,
+      "language_model": 0.3484848484848485,
+      "feature_verifier": 0.4281428142814281,
+      "chance": 0.3333333333333333
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "limitations": [
+    "One model at one quantisation on one machine with one prompt and greedy decoding. A different model, prompt or decoding rule would give a different number. Nothing here is a measurement of language models in general.",
+    "The grid is a stratified subsample of 200 claims at four budgets, declared before the run because the full 19,998 by seven grid is beyond this machine. The comparison against the feature verifier is therefore between a subsample and a full test half and is reported as such.",
+    "A completion that names no label is counted as unanswered rather than guessed. Both the rate over all claims and the rate among answered claims are reported so neither flatters the model.",
+    "The retrieval, the budgets, the corpus and the labels are the study's own and were not re-tuned for this arm.",
+    "The model may have seen this corpus during its own training. Nothing here controls for that, so a high score could reflect memorisation rather than reading the evidence supplied."
+  ]
+}

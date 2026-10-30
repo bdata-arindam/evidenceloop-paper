@@ -1,0 +1,493 @@
+RESPONSE TO REVIEWERS — ACLing 2026, submission 181
+Reading Buys Evidence, Not a Decision: The Cost of Verification and the Limits of Retrieval
+
+We thank the three reviewers for the care taken with this paper. Five of the fourteen points
+asked for analyses that the original run did not retain the records to support. Rather than
+argue around them we re-ran the study from the same input file, verified byte for byte
+against the digest the original manifest recorded, this time retaining per-claim predictions,
+then computed every one of them. One of those analyses changed a headline number and we have
+changed the paper to match. Another produced a result we did not expect and consider the most
+interesting thing in the revision.
+
+Nothing in the paper moved except where an analysis required it. The reproduction re-derived
+every published value in Sections 3 to 6 exactly, to four decimal places.
+
+We thank the three reviewers for the care they gave this paper. The comments were specific
+enough to act on. Several pointed at things we had not seen: one of them led us to a
+result we consider the most interesting in the revision;
+another showed that a number we
+reported sits at the favourable end of what resampling produces. Both are below.
+
+The table summarises where each of the fourteen comments landed. Twelve are fixed, one is fixed in
+part while one we decline with our reasons. Nothing in the table is softened; where a
+gap remains it is named as a gap.
+
+TABLE 1 WHERE EACH COMMENT LANDED
+Point | Concern raised | What we did | Status
+R1.1 | Feature-only verifier should bound the conclusions | Conclusion now restricts every accuracy claim to verifiers reading retrieval statistics | Fixed
+R1.2 | Paired intervals or tests for same-claim comparisons | Every comparison recomputed paired: bootstrap over claims plus McNemar; Table 2 carries the intervals | Fixed
+R1.3 | Materials unavailable, exact prompts not retained | Anonymous artifact bundle supplied; all 792 per-claim prompts supplied, reconstructed from retained inputs | Fixed in part
+R1.4 | Report precision alongside recall | Already in Table 3. The Figure caption that caused the confusion now names precision | Fixed
+R2.1 | Evidence retrieval is not evidence comprehension | Oracle paragraph and conclusion now draw the line where the claim is made | Fixed
+R2.2 | Not settled is a class label, not an abstention | Related work separates the two; the paper states that nothing measures a risk-coverage trade-off | Fixed
+R2.3 | Annotator-first promotion is not a universal oracle | The bound is now stated twice over as specific to this verifier and this intervention | Fixed
+R2.4 | Some conclusions stronger than the evidence | Claim-strength pass over abstract, discussion and conclusion | Fixed
+R3.1 | Recall counts one sentence, not a complete set | Both definitions now reported, in the abstract, in Table 1, in the results and in the conclusion | Fixed
+R3.2 | The pool contains pages cited by the claims | Declined. It is a separate study; the limitation is disclosed twice in the paper | Limitation, by choice
+R3.3 | The oracle gain is specific to this setup | Same fix as R2.3 | Fixed
+R3.4 | Explain the non-monotonicity and give intervals | Twenty-seed study separates the part that is resampling from the part that is systematic | Fixed
+R3.5 | Coverage rises while accuracy sometimes falls | New analysis splits the gain by whether the evidence arrived. It is not where the evidence is | Fixed
+R3.6 | Language model on 198 claims, classifier on 9,999 | Feature verifier rescored on the same 198 claims. No difference is separable from zero | Fixed
+
+WHAT THE STATUSES MEAN
+  Fixed means the paper now does what the comment asked, with the change in the text.
+  Fixed in part means the material is supplied but not in the form the comment implied. For
+    R1.3 the per-claim prompts were never captured at run time; they are regenerated from
+    retained inputs by the function the run calls, verified against its own assembly, then
+    labelled reconstructed rather than captured. The completions supplied are the re-run's.
+  Limitation, by choice means we did not do it and say why. For R3.2 an independently
+    constructed retrieval pool is a different study rather than a revision;
+    the limitation it concerns is already stated twice in the paper.
+
+WHAT CHANGED, IN SHORT
+
+  1. Evidence recall is now reported under both definitions, including the complete-set
+     definition Reviewer 3 asked for. The headline curve is lower under it and we say so.
+  2. Every same-claim comparison is now paired, with bootstrap intervals and McNemar tests.
+     This sharpened the oracle result substantially rather than weakening it.
+  3. A new analysis splits the accuracy gain by whether the evidence actually arrived. The
+     answer is that the gain is not where the evidence is. This is new in the revision.
+  3b. A twenty-seed stability study answers R3.4 and, in doing so, shows the reported split
+     is a favourable one for the oracle arm. We disclose that ourselves below.
+  4. The language model comparison is now matched: the feature verifier is scored on exactly
+     the 198 claims the language model answered.
+  5. The reject-option framing is corrected. A predicted third class is not an abstention.
+  6. Supplementary material carries the exact prompt template, the full paired tables and the
+     per-claim artifacts.
+
+A note on page budget. The submission is at the 8-page limit. The new results are in the
+paper; the full tables supporting them are in the supplementary material. We cut no result,
+no limitation, no citation and no statement of uncertainty to make room. What we removed was
+a passage in the limitations that restated, in different words, a passage already in the
+language model section.
+
+================================================================================
+WHAT THE RE-RUNS CHANGED, IN ONE PLACE
+================================================================================
+
+Three executions sit behind this revision. They are reported in the individual answers
+below; collected here so the reviewers can see at once what moved.
+
+  1. THE STUDY, RE-RUN TO RETAIN PER-CLAIM RECORDS.
+     Input verified first: the claim file was re-retrieved and its SHA-256 matched the
+     digest the original manifest records, byte for byte. Rebuilding the retrieval pool
+     reproduced its counts exactly. Every published accuracy in Sections 3 to 6 came back
+     identical to four decimal places, which is the check that the re-run is the same
+     experiment rather than a new one.
+     What it bought: the five analyses that needed per-claim predictions, namely paired
+     intervals, complete-set recall, the oracle intervals, the evidence-arrival split plus
+     the matched language model comparison.
+     What it changed in the paper: nothing by itself. No reported value moved.
+
+  2. THE LANGUAGE MODEL ARM, RE-RUN FOR THE SAME REASON.
+     This one did NOT reproduce exactly. Budgets 1 and 100 came back identical; budget 5
+     moved by three claims of 198 and budget 20 by two. The cause is non-deterministic
+     reduction order in 4-bit quantised decoding, not a change of method.
+     What it changed: the paper keeps the original run's values, which are the ones
+     submitted and the ones its manifest records. The matched comparison uses the re-run,
+     because only it retained per-claim records; it is reported against the re-run's own
+     accuracies. Both runs are tabulated in the supplementary material.
+
+  3. TWENTY SEEDS, RUN TO ANSWER R3.4 PROPERLY.
+     Everything held fixed except the seed, which controls both the split and the
+     classifier. Seed 0 is the reported split and reproduces both arms exactly.
+     What it changed: two things, one helpful to us and one not. It separated the
+     non-monotonicity into a part that is resampling and a part that is systematic, which
+     is the answer the reviewer asked for. It also showed that the reported split is a
+     favourable one for the annotator-first arm, which we disclose under R3.4 rather than
+     leave to be found.
+
+  NET EFFECT ON THE PAPER'S CLAIMS
+     Two claims are now weaker than at submission: the language model comparison, which no
+     longer settles any single difference, plus the sharpness of the oracle result, which
+     resampling does not support in its narrow form.
+     One is sharper: the oracle gain is stated per budget with intervals rather than as an
+     average.
+     Two findings are new: the accuracy gain is not located where the evidence arrives; also
+     the annotator-first arm falls systematically from two sentences to five where the arm
+     a system can run does not.
+     One headline is lower: coverage under the complete-set definition.
+     The central result is unchanged and is confirmed across resampling.
+
+================================================================================
+REVIEWER 1
+================================================================================
+
+R1.1  The verifier is feature-only; this should be acknowledged more prominently and the
+      conclusions restricted accordingly.
+
+ACCEPTED. The second half was the part we had not done. The paper already stated the
+restriction, including in the abstract, as the measurement rather than a caveat. What it did
+not do was bound its own conclusions by it. The conclusion now carries an explicit scope
+sentence: every accuracy reported is the accuracy of a verifier that reads retrieval
+statistics rather than sentences, so the conclusions bound what such a system achieves and
+what better retrieval is worth to it. They do not bound what a system reading the
+evidence as language would achieve.
+
+R1.2  Paired confidence intervals or significance tests for same-claim comparisons.
+
+ACCEPTED in full. The reviewer is exactly right that we had not done this. The submitted
+paper reported a binomial standard error of about 0.0049 and said it treated each held-out
+claim as an independent trial. Every comparison the paper actually makes is between two
+conditions scored on the same 9,999 claims, so that was the wrong error to quote.
+
+We re-ran the study retaining per-claim predictions and recomputed every comparison as a
+paired one: a bootstrap over claims with 10,000 resamples, plus McNemar's exact test on the
+discordant pairs. The reconciliation that the per-claim records reproduce the published
+accuracies is in the supplementary material and agrees at every budget.
+
+The effect on the paper is that the oracle result got stronger and more specific, not weaker:
+
+  budget   oracle minus feasible   95% paired interval   McNemar p
+       1          +0.0253          +0.0162 to +0.0344     <0.0001
+       2          +0.0168          +0.0075 to +0.0261      0.0005
+       5          +0.0130          +0.0045 to +0.0215      0.0031
+      10          -0.0016          -0.0101 to +0.0070      0.7272
+      20          -0.0032          -0.0115 to +0.0050      0.4553
+      50          -0.0021          -0.0096 to +0.0054      0.6008
+     100          +0.0019          -0.0056 to +0.0094      0.6328
+
+The submitted paper said perfect retrieval was worth "under one accuracy point on average",
+which is true but blunt. The paired analysis says something much sharper: it is worth 2.5
+points when the budget is one sentence; from ten sentences on it is worth nothing that
+can be distinguished from zero. The paper now says that. Table 2 carries the intervals.
+
+The headline budget comparison is likewise now paired: raising the budget from 1 to 100
+raises accuracy by 0.0280, 95% interval 0.0162 to 0.0396, McNemar p below 0.0001 on 3,640
+discordant claims.
+
+R1.3  Materials were unavailable at review and the exact prompts were not retained.
+
+ACCEPTED. The materials are now supplied. The manifest did record the model, the quantisation, the
+decoding rule, the token limit and the prompt shape; what it did not record was the literal
+prompt text. The supplementary material now carries the template verbatim, printed by the
+same function the run executes rather than transcribed by hand, so what a reader sees is
+the executed prompt by construction.
+
+The per-claim prompts are supplied too, all 792 of them, one per claim per budget. Each
+prompt is assembled at run time from the claim text and the sentences the retriever
+returned at that budget; both of those inputs were retained with their digests. The
+prompts are therefore regenerated by the same function the run calls. We checked that
+regeneration against the run's own assembly loop rather than asserting it: 792 prompts,
+none differing. We describe them as reconstructed rather than captured, because that is
+what they are; the digests of both inputs ship with them so a reviewer can repeat the
+reconstruction.
+
+The completions supplied are the re-run's. Reconstructing a prompt does not reconstruct the
+answer; we would rather say so than imply the original run retained more than it did.
+
+The artifact bundle is listed in the supplementary material and is anonymised.
+
+R1.4  Report precision alongside recall.
+
+ALREADY IN THE PAPER. We think the reviewer was reading Figure 4, whose caption mentioned
+only recall. Table 3 is titled "Recall and precision by label against sentences read" and
+carries three precision columns. The body already stated the comparison the reviewer is
+asking for: not-settled precision trails supported's at every budget and refuted's at five of
+seven, so recall alone does not make it the easiest decision. The conclusion repeats it.
+
+We have fixed what caused the confusion rather than added an analysis: the Figure 4 caption
+now says that recall is plotted and points to Table 3 for precision. That figure is
+numbered 2 in the revision, because two figures moved to the supplementary material.
+
+================================================================================
+REVIEWER 2
+================================================================================
+
+R2.1  Evidence retrieval is not evidence comprehension.
+
+AGREED. This is the paper's own thesis, so the reviewer is telling us we did not say it
+clearly enough at the point where it matters. The oracle paragraph now draws the line
+explicitly: the bound says what promoting annotator sentences is worth to a classifier
+reading retrieval statistics, not what better retrieval would be worth to a system that read
+the sentences as language. The conclusion carries the same restriction as a scope sentence.
+
+R2.2  NOT ENOUGH INFO is a class label, not an abstention decision; the link to selective
+      classification should be qualified.
+
+ACCEPTED. This was a genuine conflation and we are grateful it was caught. The submitted
+paper wrote that withholding a verdict when evidence is insufficient "is the reject option
+Chow analysed", which is wrong in a way that matters: our system predicts a third class, it
+does not withhold anything.
+
+The related-work passage now separates the two. A classifier with a reject option withholds a
+decision it was asked to make, trading coverage against risk. Our verifier never withholds:
+not settled is one of three classes it must choose between, it is scored like any other label
+and coverage is fixed at one. Not settled is a property the corpus asserts about a claim,
+not an abstention the verifier elects. We state that nothing in the paper measures a
+risk-coverage trade-off. The selective-classification citations are now framed as an
+analogy rather than as an instance.
+
+R2.3  Annotator-first promotion is an upper bound for this setup, not a universal retrieval
+      oracle.
+
+ACCEPTED. The paper said "no analyst could do this, so it is an upper bound", which bounds
+the feasibility but not the generality. The oracle paragraph now ends by binding the result
+twice over: it is a bound on this verifier and on this intervention. The paired analysis
+makes the restriction sharper rather than vaguer, because it shows the oracle's value is
+confined to budgets below ten.
+
+R2.4  Some conclusions are stronger than the evidence supports; narrow them to the evaluated
+      conditions.
+
+ACCEPTED. We made a claim-strength pass over the abstract, the discussion and the conclusion.
+The substantive changes are: the oracle claim is now stated per budget with intervals instead
+of as an average; the language model comparison is stated as matched on 198 claims and
+explicitly described as bounding rather than settling; and the conclusion restricts every
+accuracy claim to verifiers that read retrieval statistics. Where the evidence did not allow
+narrowing we left the claim alone rather than hedging it decoratively.
+
+================================================================================
+REVIEWER 3
+================================================================================
+
+R3.1  Recall counts whether at least one annotator sentence was retrieved, not whether the
+      complete evidence set was.
+
+ACCEPTED. This was the most substantive point of the fourteen. The reviewer is right that
+the submitted paper did not say which definition it used and right that it used the weaker
+one.
+
+We should note in our own defence only that the distinction was understood in the paper: the
+related-work section defines the FEVER score as label accuracy counted where at least one
+complete set of annotator evidence has been retrieved. The coverage curve simply did not use
+that definition. So this is an addition rather than a correction of an error.
+
+We computed both. The complete-set curve is lower at every budget:
+
+  sentences read    at least one sentence    a complete annotator set
+               1          0.5892                     0.5390
+               2          0.7221                     0.6669
+               5          0.8489                     0.7895
+              10          0.9089                     0.8521
+              20          0.9496                     0.8977
+              50          0.9761                     0.9302
+             100          0.9863                     0.9453
+
+The headline is weaker under the stricter definition and the paper now reports it that way,
+in the abstract, in Table 1, in the results and in the conclusion. The qualitative finding is
+unchanged and in one respect is strengthened: after reading a hundred sentences, about one
+settleable claim in eighteen still has no complete annotator set retrieved, which the
+at-least-one measure hid. A supplementary figure plots the two curves together.
+
+The central comparison is unaffected in direction. Evidence recall rises by about 40 points
+under either definition while accuracy rises by 2.8, so the fourteenfold divergence the paper
+reports holds under both.
+
+R3.2  The retrieval pool contains the pages cited by the evaluation claims, so retrieval is
+      easier here than searching the full encyclopaedia.
+
+ALREADY DISCLOSED. We would rather point to it than add to it. The paper states the pool
+construction in numbers — 2,892 cited pages plus 119,599 sampled distractors, 122,491 pages
+of 5,416,537 scanned — and then states the consequence: a smaller pool makes retrieval easier
+than the full snapshot, so every cost reported here is a lower bound. The discussion repeats
+it among the boundaries.
+
+We considered building an independently constructed retrieval set. We decided against it and
+want to be straightforward about why: it is a different study rather than a revision;
+with the pool as the independent variable it would change what the paper measures. We would
+rather report the limitation accurately than half-address it.
+
+R3.3  The oracle's gain is specific to this classifier and setup.
+
+ACCEPTED; this is the same fix as R2.3 and the oracle paragraph now carries it. The paired
+analysis also replaces the single averaged number with a per-budget statement, which is
+harder to over-read.
+
+R3.4  Oracle accuracy is non-monotonic across budgets. Explain it and give intervals.
+
+ACCEPTED. The intervals turned out to be the whole answer. The reviewer correctly spotted
+that oracle accuracy falls from 0.4285 at two sentences to 0.4162 at fifty. Paired, every
+consecutive difference within that arm has an interval containing zero except 50 to 100.
+The whole one-to-a-hundred difference is +0.0046 with an interval of -0.0073 to +0.0163.
+
+Rather than leave it there, we did what the question actually calls for: we held everything
+fixed except the seed, which controls both the train/test split and the classifier, then
+repeated the study over twenty seeds. Seed 0 is the reported split and reproduces both arms
+exactly. The result separates the dip into two parts.
+
+The part the reviewer points at is resampling variation. On the reported split the
+annotator-first minimum sits at fifty sentences; across twenty seeds it moves to six
+different budgets, landing at one sentence on nine of them and at fifty on three.
+
+The part we did not anticipate is real; it changes the paper. The annotator-first arm
+rises from one sentence to two on twenty seeds out of twenty, falling from two to five on
+nineteen out of twenty. The arm a system can actually run does not do this; its two-to-five
+step rises on fifteen of twenty. So the drop belongs to the intervention rather than to the
+budget. A reading consistent with that contrast, which we do not test, is that once the
+annotator sentences are placed first every further sentence is a non-gold one, leaving the
+statistics the verifier reads diluted by material that cannot settle the claim.
+
+The submitted paper did not discuss the non-monotonicity; our first answer to this point
+declined to interpret it. The paper now says which part of it is noise and which part is not. The supplementary material carries the
+seed-by-seed tables and a figure.
+
+One consequence we should disclose rather than let a reviewer find. The reported split is a
+favourable one for this arm. The gain at one sentence is +0.0253 here against a twenty-seed
+mean of +0.0197, third highest of the twenty; the gain at five sentences is the largest of
+all twenty. At ten and twenty sentences the reported split is at the other end: it shows a small
+negative where the seed mean is slightly positive. The direction of the oracle result is
+unchanged and the gain is positive on twenty seeds out of twenty at one sentence; the
+sharper reading, that the gain is confined below five sentences and absent thereafter, is
+not supported by resampling. The paper now states the reported-split values, which come from
+the seed fixed before the run, together with that qualification. We have not re-baselined the
+paper onto across-seed means: the seed was fixed in advance, so changing the headline after
+seeing which seed was favourable would be the wrong correction. We think that is the honest answer to the question as
+asked. The full budget-by-budget paired table for both arms is in the supplementary material.
+
+R3.5  Coverage rises while accuracy sometimes falls. This needs investigation.
+
+ACCEPTED. This produced the result we found most interesting in the revision. We agree it
+needed investigating rather than asserting, so we did the obvious thing with the per-claim
+records: split the held-out claims by whether a complete annotator evidence set had actually
+been retrieved, then measure the paired accuracy change within each group.
+
+Over the full range, from one sentence to a hundred:
+
+  group                                       claims   accuracy change   95% interval
+  complete evidence arrived in that range      2,772       +0.0418       +0.0198 to +0.0642
+  complete evidence already there at 1         3,625       -0.0050       -0.0240 to +0.0141
+  complete evidence never arrived              3,602       +0.0505       +0.0303 to +0.0711
+
+The gain is not where the evidence is. Claims whose evidence never arrives improve by more
+than claims whose evidence does arrive; claims that already had their evidence at one
+sentence do not improve at all. For this verifier, a larger budget changes the retrieval
+statistics rather than supplying the decisive sentence, which is why coverage and accuracy
+move independently.
+
+This is now a paragraph in the paper and it reinforces its thesis by a second, independent
+route: the oracle arm says better retrieval does not help; this split says the help a
+larger budget does give is not coming from retrieval either. The full budget-by-budget table
+is in the supplementary material.
+
+R3.6  The language model is scored on 198 claims and the classifier on 9,999.
+
+ACCEPTED. The matched comparison changed our claim, so we have weakened it. The subsample
+is drawn deterministically from the same held-out half, stratified by label, so we reproduced
+it exactly and rescored the feature verifier on precisely those 198 claims.
+
+  sentences read   language model   feature verifier   difference   95% interval      McNemar p
+               1       0.4697            0.3788         +0.0909   +0.0000 to +0.1818    0.0662
+               5       0.4697            0.3990         +0.0707   -0.0253 to +0.1616    0.1654
+              20       0.3990            0.4091         -0.0101   -0.1010 to +0.0808    0.9161
+             100       0.3485            0.3737         -0.0253   -0.1212 to +0.0707    0.6817
+
+Paired on the same claims, none of the four differences is separable from zero. The submitted
+paper said the language model "leads by 2.0 and 2.2 times that error at the two smaller
+budgets", which overstated what 198 claims can show. The revised text reports the matched
+numbers, states that no single comparison is settled and keeps only the observation that the
+direction is consistent across budgets. The arm bounds the question rather than answering it.
+
+One disclosure. The matched test needs the language model's per-claim predictions, which the
+original run did not retain, so that arm was re-run. It reproduced one and a hundred sentences
+exactly and moved by three claims at five and two at twenty, which is ordinary non-determinism
+in 4-bit quantised decoding rather than a change of method. Both runs are tabulated in the
+supplementary material and the paper reports the original run's values, which are the ones
+submitted. We would rather state this than present the arm as exactly reproducible.
+
+================================================================================
+WHAT THIS REVISION LEAVES FOR FURTHER WORK
+================================================================================
+
+The analyses added here close some questions by opening others. We list them because
+several are more interesting than what the paper settles, not to promise them.
+
+  AN INDEPENDENTLY CONSTRUCTED RETRIEVAL POOL. Reviewer 3 asks for this and we decline it
+  as a separate study rather than a revision. It is the right next experiment. The pool
+  here is every cited page plus sampled distractors, which makes retrieval easier so that
+  every cost is a lower bound. Rebuilding it without reference to the evaluation claims would
+  turn that bound into a measurement.
+
+  A VERIFIER THAT READS THE SENTENCES. Every accuracy here belongs to a system reading
+  retrieval statistics rather than language, which the conclusion now says explicitly. The
+  natural successor is the same budget sweep with a reader that understands the retrieved
+  text, which would say whether the gap this paper measures is a property of the task or of
+  this verifier.
+
+  THE DILUTION READING, TESTED. The annotator-first arm falls from two sentences to five on
+  nineteen of twenty seeds while the feasible arm rises. We offer dilution as a reading
+  consistent with the contrast and we do not test it. A direct test would hold the gold
+  sentences fixed and vary only the non-gold material placed after them.
+
+  THE LANGUAGE MODEL ARM AT FULL SCALE. It runs on 198 claims at four of the seven budgets,
+  which is why the matched comparison settles nothing. The full held-out half at all seven
+  budgets would decide whether reading the sentences beats reading their statistics.
+
+  MORE THAN TWENTY SEEDS, AND NESTED RESAMPLING. Twenty is enough to show the dip moves and
+  to place the reported split in a distribution; it is a small sample for the percentile
+  statements, which is why they are phrased as counts out of twenty rather than as
+  population quantiles.
+
+  COMPLETE-SET RECALL AS AN OPERATING TARGET. After a hundred sentences about one settleable
+  claim in eighteen still has no complete annotator set retrieved. What it would cost to
+  close that remainder, in sentences read, is not measured here.
+
+================================================================================
+SUMMARY OF CHANGES TO THE MANUSCRIPT
+================================================================================
+
+ADDED
+  Complete-set evidence recall, as a column in Table 1 and in the abstract, results and
+    conclusion.
+  Paired bootstrap intervals and McNemar tests for every same-claim comparison, with the
+    interval column added to Table 2.
+  A paragraph reporting where the accuracy gained by reading more actually comes from.
+  A paragraph separating a predicted third class from an abstention decision.
+  A matched comparison between the language model and the feature verifier on the same claims.
+  A scope sentence in the conclusion restricting every accuracy claim to verifiers that read
+    retrieval statistics.
+  A twenty-seed stability study separating the part of the non-monotonicity that is
+    resampling from the part that is not.
+  Supplementary material: the executed prompt, the full paired tables, the seed-stability
+    tables and figure, the reproduction record and the artifact listing.
+
+CHANGED
+  The oracle claim, from an average to a per-budget statement with intervals, now qualified
+    by how it behaves across twenty resamplings.
+  The non-monotonicity, from uninterpretable to separated into a resampling part and a
+    systematic one.
+  The language model claim, weakened to a bounded, matched statement.
+  The Figure 2 caption now names precision and points to Table 3.
+  Two figure titles that over-claimed: one said "perfect retrieval" where the intervention is
+    annotator-first promotion, the other used abstention wording for a predicted class.
+  Section cross-references, which were in Roman numerals from an earlier build.
+
+REMOVED, ALL OF IT REDUNDANCY
+  A passage in the limitations restating the language model comparison already made in
+    Section 7, in different words, including the same standard error twice.
+  A sentence in the discussion restating the contrast with Ev2R already made at length in
+    Related work.
+  Two figures that each duplicated a table in the same paper, moved to the supplementary
+    material: the retrieval-pool figure, whose data is in Table 1 and in the text; the
+    oracle figure, whose two series are Table 2. Both still appear, in the supplement.
+
+No result, negative finding, limitation, citation or statement of uncertainty was removed.
+
+NOT DONE, WITH REASONS
+  An independently constructed retrieval corpus for R3.2. It is a separate study; the
+    limitation is disclosed twice in the paper already.
+  An explanation of the oracle arm's non-monotonicity. The paired intervals show the dip is
+    not separable from zero, so we decline to supply a mechanism for it.
+  Retrospective recovery of the original per-claim prompt text. It was not retained and we
+    will not reconstruct it.
+
+VERIFICATION OF THIS REVISION
+  Rebuilt through the same path as the original submission: the anonymous specification, the
+  conversion package's Procedia profile and the template downloaded from the conference site,
+  whose two archives were re-verified against their recorded SHA-256 digests before use.
+  The submission is 8 pages, within the 8-page limit. Every page was rendered and inspected.
+  Cross-references resolve; no undefined reference remains. The manuscript is anonymous: the
+  rendered PDF and DOCX carry no author name and the PDF metadata author field is absent.
+  The per-claim records reconcile with every accuracy the paper reports, at every budget.
+  The prompt printed in the supplementary material was checked line by line against the
+  prompt the run builds; it is generated from it.

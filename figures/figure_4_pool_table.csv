@@ -1,0 +1,2 @@
+,pages_cited_wanted,pages_cited_found,distractors,pages_total,lines_scanned,n_distractors_target,seed,note
+0,2892,2892,119599,122491,5416537,120000,0,"The retrieval pool is every cited page plus a random sample of the rest. A smaller pool makes retrieval easier than the full snapshot, so every cost measured on it is a lower bound."

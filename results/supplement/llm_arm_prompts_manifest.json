@@ -1,0 +1,20 @@
+{
+  "status": "COMPLETED",
+  "what": "the prompt given to the language model for every scored claim at every budget",
+  "provenance": "RECONSTRUCTED from retained artifacts, not recovered from a log. The prompt is a deterministic function of the claim text and the retrieved sentences, so it is reproduced exactly; the completions are not reconstructible and are the re-run's.",
+  "prompts": 792,
+  "claims": 198,
+  "budgets": [
+    1,
+    5,
+    20,
+    100
+  ],
+  "max_sentence_characters": 320,
+  "inputs": {
+    "retrieved_idx.npy": "8a4bd5736038152781c6310389cae188bdc1f086b2dc465ac0549c92e33c0c18",
+    "page_store.jsonl": "2dbd60302accea7bcec6e839fd1f28178f5d845f150a8c65879be67ace7a5d4f",
+    "fever_dev.jsonl": "e89865bfe1b4dd054e03dd57d7241a6fde24862905f31117cf0cd719f7c78df7"
+  },
+  "builder": "evidenceloop.llm_arm.user_message, the function the run executes"
+}

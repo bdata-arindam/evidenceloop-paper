@@ -1,0 +1,37 @@
+{
+  "status": "COMPLETED",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "budgets": [
+    1,
+    2,
+    5,
+    10,
+    20,
+    50,
+    100
+  ],
+  "split": 0.5,
+  "question": "whether the annotator-first arm's non-monotonicity is stable across resampling, the seed controlling both the split and the classifier",
+  "note": "features are seed-independent and were computed once; nothing else is shared between seeds"
+}

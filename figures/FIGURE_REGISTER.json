@@ -1,0 +1,38 @@
+[
+  {
+    "figure": "figure_1_cost.png",
+    "table_view": "figure_1_cost_table.csv",
+    "generated_from": "evidence_recall.csv",
+    "run_id": "20261029T162220Z",
+    "classification": "EXECUTION-DERIVED RESULT",
+    "generator": "src/evidenceloop/figures.py",
+    "caption": "Evidence recall and verification accuracy against sentences read."
+  },
+  {
+    "figure": "figure_2_oracle.png",
+    "table_view": "figure_2_oracle_table.csv",
+    "generated_from": "verification_oracle_retrieval.csv",
+    "run_id": "20261029T162220Z",
+    "classification": "EXECUTION-DERIVED RESULT",
+    "generator": "src/evidenceloop/figures.py",
+    "caption": "Verification with retrieved evidence against the annotator's own sentences."
+  },
+  {
+    "figure": "figure_3_by_label.png",
+    "table_view": "figure_3_by_label_table.csv",
+    "generated_from": "verification_by_budget.csv",
+    "run_id": "20261029T162220Z",
+    "classification": "EXECUTION-DERIVED RESULT",
+    "generator": "src/evidenceloop/figures.py",
+    "caption": "Which kind of claim a larger reading budget helps."
+  },
+  {
+    "figure": "figure_4_pool.png",
+    "table_view": "figure_4_pool_table.csv",
+    "generated_from": "page_store_meta.json",
+    "run_id": "20261029T162220Z",
+    "classification": "EXECUTION-DERIVED RESULT",
+    "generator": "src/evidenceloop/figures.py",
+    "caption": "The retrieval pool and the share of evidence still unread at each budget."
+  }
+]

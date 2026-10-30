@@ -1,0 +1,60 @@
+TWENTY-SEED STABILITY RUN — OBSERVATIONS, 29 OCTOBER 2026
+Recorded before any change to the manuscript, supplement or response.
+
+WHAT WAS RUN
+  Everything held fixed except the seed, which controls both the train/test split and the
+  classifier: 20 seeds, 7 budgets, 2 arms. Features depend on the retrieval and the budget
+  rather than the seed, so they were computed once and shared. Seed 0 reproduced both
+  published arms exactly, which is the check that the harness is faithful.
+
+1. THE DIP THE REVIEWER POINTED AT IS RESAMPLING VARIATION
+   Seed 0 puts the annotator-first minimum at budget 50. Across 20 seeds the minimum lands
+   at budget 1 nine times, at 5 three times, at 20 three times, at 50 three times, at 10
+   once and at 100 once. Seed 0's pattern occurs in 3 of 20. R3.4 can now be answered
+   positively rather than declined.
+
+2. BUT A DIFFERENT NON-MONOTONICITY IS SYSTEMATIC, AND THE PAPER CURRENTLY DENIES IT
+   Paired within seed, in the annotator-first arm:
+       1 ->   2   +0.0102   20 of 20 seeds improve    sign p <0.0001
+       2 ->   5   -0.0068    1 of 20 seeds improve    sign p <0.0001
+       5 ->  10   -0.0008    7 of 20                  ns
+      10 ->  20   -0.0014    6 of 20                  ns
+      20 ->  50   +0.0011   13 of 20                  ns
+      50 -> 100   +0.0045   14 of 20                  ns
+   The arm genuinely peaks at two sentences and genuinely falls from two to five. That is a
+   real non-monotonicity; the paper says the non-monotonicity is not interpretable.
+   The feasible arm does NOT do this: its 2 -> 5 step is +0.0041 with 15 of 20 improving
+   while its maximum is at budget 100 in 14 of 20 seeds; the drop therefore belongs to the oracle
+   intervention rather than to the budget.
+   A mechanism consistent with that contrast, NOT tested here: once the annotator's
+   sentences are placed first, reading further adds only non-gold sentences that dilute
+   the summary statistics the verifier reads. Offered as a hypothesis, not a finding.
+
+3. THE PAPER'S QUOTED ORACLE GAPS COME FROM A FAVOURABLE SPLIT
+   paper value against the distribution over 20 seeds:
+      budget   1   paper +0.0253   seeds mean +0.0197 (sd 0.0040)   85th percentile
+      budget   2   paper +0.0168   seeds mean +0.0159 (sd 0.0049)   70th
+      budget   5   paper +0.0130   seeds mean +0.0049 (sd 0.0047)   95th
+      budget  10   paper -0.0016   seeds mean +0.0031 (sd 0.0036)   15th
+      budget  20   paper -0.0032   seeds mean +0.0016 (sd 0.0038)   15th
+      budget  50   paper -0.0021   seeds mean -0.0008 (sd 0.0052)   50th
+      budget 100   paper +0.0019   seeds mean -0.0011 (sd 0.0036)   80th
+   The paper's budget-5 gain sits at the 95th percentile of what resampling produces, while
+   its "nothing measurable from ten sentences on" rests on two values at the 15th
+   percentile. Across seeds the gap declines smoothly and stays slightly positive at 10 and
+   20 rather than vanishing. The direction of the paper's story survives; the sharp
+   "all of it below five sentences, nothing after" does not.
+
+4. THE CENTRAL RESULT IS UNAFFECTED AND IS CONFIRMED
+   Feasible arm, 1 -> 100: +0.0276 across seeds with 20 of 20 improving, against the
+   +0.0280 the paper reports. The headline that evidence recall rises about forty points
+   while the decision rises under three is unchanged by resampling.
+
+5. ONE MORE ITEM TO REVISIT
+   The paper calls the annotator-first 1 -> 100 difference not separable from noise
+   (+0.0046, interval -0.0073 to +0.0163). Across seeds it is +0.0067 with 16 of 20
+   improving, sign p 0.0118: weakly positive rather than absent.
+
+STATUS
+  No manuscript, supplement or response text has been changed on the basis of this run.
+  Data: results_real/supplement/seed_stability.csv, 280 rows, with its manifest.
